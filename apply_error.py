@@ -2,7 +2,8 @@ import numpy as np
 import argparse
 import os
 import json
-
+import copy
+import pdb
 
 def apply_error(args):
 
@@ -18,9 +19,13 @@ def apply_error(args):
     os.makedirs(path_new, exist_ok=True)
 
     for s in splits:
-        
+        meta_new = copy.deepcopy(metas[s])
         if s == 'train':
-            pass
+            for f in meta_new['frames']:
+                trans_mat = np.array(f['transform_matrix'])
+                pdb.set_trace()
+                translation_error = 0
+                trans_mat[:3, 3] += 0
         else:
             pass
         
@@ -32,8 +37,8 @@ def apply_error(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--path', type=str)
-    parser.add_argument('--rotation_error', type=float)
-    parser.add_argument('--translation_error', type=float)
+    parser.add_argument('--rotation_error', type=float, default=0)
+    parser.add_argument('--translation_error', type=float, default=0)
 
     args = parser.parse_args()
 
