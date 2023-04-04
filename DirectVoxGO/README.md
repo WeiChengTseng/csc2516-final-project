@@ -2,7 +2,12 @@
 
 ## New Experiments
 ```bash
-$ python run.py --config configs/nerf/lego.py --render_test
+$ python run.py --config configs/nerf/lego_r_0.01_t_0.py --render_test --eval_lpips_vgg
+$ python run.py --config configs/nerf/lego_r_0.05_t_0.py --render_test --eval_lpips_vgg
+$ python run.py --config configs/nerf/lego_r_0.1_t_0.py --render_test --eval_lpips_vgg
+$ python run.py --config configs/nerf/lego_r_0_t_0.01.py --render_test --eval_lpips_vgg
+$ python run.py --config configs/nerf/lego_r_0_t_0.05py --render_test --eval_lpips_vgg
+$ python run.py --config configs/nerf/lego_r_0_t_0.1py --render_test --eval_lpips_vgg
 ```
 
 ---

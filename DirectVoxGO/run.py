@@ -15,6 +15,14 @@ from lib.load_data import load_data
 
 from torch_efficient_distloss import flatten_eff_distloss
 
+# import lpips
+# loss_fn = lpips.LPIPS(net='alex')
+
+
+# def calc_lpips(im0, im1):
+#     with torch.no_grad():
+#         dist = loss_fn.forward(im0,im1)
+#     return  dist
 
 def config_parser():
     '''Define command line arguments

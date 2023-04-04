@@ -71,7 +71,7 @@ def apply_error(args):
             f['file_path'] = f['file_path'].replace(
                 '.', f'../{os.path.basename(args.path)}')
 
-        write_json(meta_new, os.path.join(path_new, f'transform_{s}.json'))
+        write_json(meta_new, os.path.join(path_new, f'transforms_{s}.json'))
 
     return
 
