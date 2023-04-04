@@ -9,6 +9,19 @@ import math
 from scipy.spatial.transform import Rotation as R
 
 
+def read_json(path):
+    with open(path, 'r') as fp:
+        file_json = json.load(fp)
+    return file_json
+
+
+def write_json(file_json, path):
+    json_object = json.dumps(file_json, indent=4)
+    with open(path, "w") as outfile:
+        outfile.write(json_object)
+    return
+
+
 def apply_error(args):
 
     splits = ['train', 'val', 'test']
@@ -24,10 +37,12 @@ def apply_error(args):
 
     for s in splits:
         meta_new = copy.deepcopy(metas[s])
-        if s == 'train':
-            for f in meta_new['frames']:
+
+        for f in meta_new['frames']:
+            if s == 'train':
                 trans_mat = np.array(f['transform_matrix'])
-                pdb.set_trace()
+
+                # apply translation error
                 theta = np.random.uniform(0, 2 * math.pi)
                 phi = np.random.uniform(-0.5 * math.pi, 0.5 * math.pi)
                 translation_error = np.array([
@@ -36,13 +51,24 @@ def apply_error(args):
                     np.sin(phi)
                 ]) * args.translation_error
 
-                rot_mat = R.from_rotvec(np.pi / 2 *
-                                        np.array([0, 0, 1])).as_matrix()
+                # apply rotation error
+                rot_x = np.random.uniform(-math.pi,
+                                          math.pi) * args.rotation_error
+                rot_y = np.random.uniform(-math.pi,
+                                          math.pi) * args.rotation_error
+                rot_z = np.random.uniform(-math.pi,
+                                          math.pi) * args.rotation_error
+
+                rot_mat = R.from_rotvec([rot_x, rot_y, rot_z]).as_matrix()
 
                 trans_mat[:3, :3] = rot_mat @ trans_mat[:3, :3]
                 trans_mat[:3, 3] += np.array(translation_error)
-        else:
-            pass
+
+            # modify the path in original json file
+            f['file_path'] = f['file_path'].replace(
+                '.', f'../{os.path.basename(args.path)}')
+
+        write_json(meta_new, os.path.join(path_new, f'transform_{s}.json'))
 
     return
 
