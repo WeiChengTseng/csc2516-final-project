@@ -84,3 +84,10 @@ if __name__ == '__main__':
     apply_error(args)
 
     # python apply_error.py --path ./nerf/data/nerf_synthetic/lego
+    # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --rotation_error 0.01
+    # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --rotation_error 0.05
+
+
+    # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --translation_error 0.01
+    # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --translation_error 0.05
+    # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --translation_error 0.1
