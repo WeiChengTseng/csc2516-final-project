@@ -38,7 +38,7 @@ def apply_error(args):
     for s in splits:
         meta_new = copy.deepcopy(metas[s])
 
-        for f in meta_new['frames']:
+        for idx, f in enumerate(meta_new['frames']):
             if s == 'train':
                 trans_mat = np.array(f['transform_matrix'])
 
@@ -64,6 +64,9 @@ def apply_error(args):
                 trans_mat[:3, :3] = rot_mat @ trans_mat[:3, :3]
                 trans_mat[:3, 3] += np.array(translation_error)
 
+                meta_new['frames'][idx]['transform_matrix'] = trans_mat.tolist(
+                )
+
             # modify the path in original json file
             f['file_path'] = f['file_path'].replace(
                 '.', f'../{os.path.basename(args.path)}')
@@ -86,7 +89,7 @@ if __name__ == '__main__':
     # python apply_error.py --path ./nerf/data/nerf_synthetic/lego
     # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --rotation_error 0.01
     # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --rotation_error 0.05
-
+    # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --rotation_error 0.1
 
     # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --translation_error 0.01
     # python apply_error.py --path ./nerf/data/nerf_synthetic/lego --translation_error 0.05
