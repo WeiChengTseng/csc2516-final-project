@@ -4,6 +4,10 @@ import os
 import json
 import copy
 import pdb
+import math
+
+from scipy.spatial.transform import Rotation as R
+
 
 def apply_error(args):
 
@@ -24,12 +28,21 @@ def apply_error(args):
             for f in meta_new['frames']:
                 trans_mat = np.array(f['transform_matrix'])
                 pdb.set_trace()
-                translation_error = 0
-                trans_mat[:3, 3] += 0
+                theta = np.random.uniform(0, 2 * math.pi)
+                phi = np.random.uniform(-0.5 * math.pi, 0.5 * math.pi)
+                translation_error = np.array([
+                    np.cos(theta) * np.cos(theta),
+                    np.sin(theta) * np.cos(theta),
+                    np.sin(phi)
+                ]) * args.translation_error
+
+                rot_mat = R.from_rotvec(np.pi / 2 *
+                                        np.array([0, 0, 1])).as_matrix()
+
+                trans_mat[:3, :3] = rot_mat @ trans_mat[:3, :3]
+                trans_mat[:3, 3] += np.array(translation_error)
         else:
             pass
-        
-
 
     return
 
