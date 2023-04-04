@@ -1,5 +1,12 @@
 # DirectVoxGO
 
+## New Experiments
+```bash
+$ python run.py --config configs/nerf/lego.py --render_test
+```
+
+---
+
 Direct Voxel Grid Optimization (CVPR2022 Oral, [project page](https://sunset1995.github.io/dvgo/), [DVGO paper](https://arxiv.org/abs/2111.11215), [DVGO v2 paper](https://arxiv.org/abs/2206.05085)).
 
 https://user-images.githubusercontent.com/2712505/153380311-19d6c3a1-9130-489a-af16-ad36c78f10a9.mp4
@@ -134,6 +141,8 @@ pip install -r requirements.txt
                 └── masks
                     └── frame*.png
 </details>
+
+
 
 
 
