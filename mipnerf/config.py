@@ -41,7 +41,7 @@ def get_config():
     config.add_argument("--do_eval", action="store_false")
     config.add_argument("--continue_training", action="store_true")
     config.add_argument("--save_every", type=int, default=1000)
-    config.add_argument("--device", type=str, default="cuda")
+    config.add_argument("--device", type=str, default="cuda:2")
     # visualization hyperparams
     config.add_argument("--chunks", type=int, default=8192)
     config.add_argument("--model_weight_path", default="log/model.pt")
@@ -65,7 +65,7 @@ def get_config():
         config.density_noise = 1.0
 
     config.device = torch.device(config.device)
-    base_data_path = "data/nerf_llff_data/"
+    base_data_path = "../nerf/data/nerf_llff_data/"
     if config.dataset_name == "blender":
         base_data_path = "../nerf/data/nerf_synthetic/"
     elif config.dataset_name == "multicam":

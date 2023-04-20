@@ -5,17 +5,20 @@ approach = ['NeRF', 'Mip-NeRF', 'DirectVoxGO']
 psnr = {
     'NeRF': [30.9, 29.9, 27.9, 27.0],
     'Mip-NeRF': [33.2, 29.2, 25.2, 25.0],
-    'DirectVoxGO': [32.07, 31.07, 28.07, 23.07]
+    # 'DirectVoxGO': [32.07, 31.07, 28.07, 23.07]
+    'DirectVoxGO': [32.07, 23.59, 16.35, 14.66]
 }
 ssim = {
     'NeRF': [0.947, 0.927, 0.877, 0.844],
     'Mip-NeRF': [0.957, 0.928, 0.857, 0.837],
-    'DirectVoxGO': [0.960, 0.930, 0.888, 0.80]
+    # 'DirectVoxGO': [0.960, 0.930, 0.888, 0.80]
+    'DirectVoxGO': [0.960, 0.844, 0.692, 0.662]
 }
 lpips = {
     'NeRF': [0.081, 0.101, 0.121, 0.131],
     'Mip-NeRF': [0.047, 0.12, 0.129, 0.147],
-    'DirectVoxGO': [0.057, 0.087, 0.097, 0.137]
+    # 'DirectVoxGO': [0.057, 0.087, 0.097, 0.137]
+    'DirectVoxGO': [0.057, 0.146, 0.294, 0.338]
 }
 error = [0, 0.01, 0.05, 0.1]
 perf_name = ['PSNR ↑', 'SSIM ↑', 'LPIPS ↓']
@@ -39,4 +42,4 @@ fig.subplots_adjust(bottom=0.20,
                     hspace=0.0)
 # fig.tight_layout()
 fig.legend(lines[:3], approach, loc='lower center', ncol=3)
-fig.savefig('translation_error.png', dpi=300)
+fig.savefig('translation_error_.png', dpi=300)
